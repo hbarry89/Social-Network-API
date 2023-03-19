@@ -15,6 +15,7 @@
 ### Resources :books:
 - Bootcamp Materials
 - Demonstration by TA in class
+- Insomnia import provided by TA
 - Tutor
 
 ### Assets :sparkles:
