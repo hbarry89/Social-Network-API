@@ -18,10 +18,12 @@ const reactionSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+    get: createdAtVal => dateFormat(createdAtVal)
   }
 },
 {
   toJSON: {
+    getters: true
   }
 });
 
@@ -36,6 +38,7 @@ const thoughtSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+    get: createdAtVal => dateFormat(createdAtVal)
   },
   username: {
     type: String,
@@ -45,7 +48,8 @@ const thoughtSchema = new mongoose.Schema({
 },
 {
   toJSON: {
-    virtuals: true
+    virtuals: true,
+    getters: true
   },
   id: false
 });
@@ -55,6 +59,11 @@ thoughtSchema.virtual('reactionCount').get(function() {
   return this.reactions.length;
 });
 
-const Thought = mongoose.model('Thought', thoughtSchema);
+// Formats the date using the 'dateformat' package
+function dateFormat(date) {
+  return date.toLocaleString();
+}
+
+const Thought = mongoose.model('thought', thoughtSchema);
 
 module.exports = Thought;
