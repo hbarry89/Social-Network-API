@@ -18,13 +18,10 @@ const reactionSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-// Use a getter method to format the timestamp on query
   }
 },
 {
   toJSON: {
-// Schema Settings:
-// This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
   }
 });
 
@@ -39,7 +36,6 @@ const thoughtSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-// Use a getter method to format the timestamp on query
   },
   username: {
     type: String,
@@ -54,8 +50,10 @@ const thoughtSchema = new mongoose.Schema({
   id: false
 });
 
-// Schema Settings:
-// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+// Reaction virtual
+thoughtSchema.virtual('reactionCount').get(function() {
+  return this.reactions.length;
+});
 
 const Thought = mongoose.model('Thought', thoughtSchema);
 

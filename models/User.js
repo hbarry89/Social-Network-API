@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    // Must match a valid email address (look into Mongoose's matching validation)
+    match: [/.+@.+\..+/, 'Please enter a valid email address']
   },
   thoughts: [
     {
@@ -34,8 +34,10 @@ const userSchema = new mongoose.Schema({
   id: false
 });
 
-// Schema Settings:
-// Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+// Friend virtual
+userSchema.virtual('friendCount').get(function() {
+  return this.friends.length;
+});
 
 const User = mongoose.model('User', userSchema);
 
