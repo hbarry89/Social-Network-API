@@ -59,22 +59,41 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // /api/thoughts/:thoughtId/reactions
-
   // POST to create a reaction stored in a single thought's reactions array field
-  createReaction(req, res) {
-    Thought.create(req.body)
-      .then((dbReactionData) => res.json(dbReactionData))
+  // createReaction(req, res) {
+  //   Thought.create(req.body)
+  //     .then((dbReactionData) => res.json(dbReactionData))
+  //     .catch((err) => res.status(500).json(err));
+  // },
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $addToSet: { assignments: req.body } },
+      { runValidators: true, new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res
+              .status(404)
+              .json({ message: 'No thought with this id!' })
+          : res.json(thought)
+      )
       .catch((err) => res.status(500).json(err));
   },
 
   // DELETE to pull and remove a reaction by the reaction's reactionId value
   deleteReaction(req, res) {
-    Thought.findOneAndDelete({ _id: req.params.reactionId })
-      .then((reaction) =>
-        !reaction
-          ? res.status(404).json({ message: 'No reaction with this id!' })
-          : res.json(reaction)
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { runValidators: true, new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res
+              .status(404)
+              .json({ message: 'No thought with this id!' })
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },

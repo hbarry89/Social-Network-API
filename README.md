@@ -24,13 +24,14 @@
 
 ### Resources :books:
 - Bootcamp Materials
-- Unit 18-NoSQL: *20-Stu_Aggregates* and *22-Stu_Virtuals*
+- Unit 18 Mini-Project
 - Demonstration by TA in class
 - Insomnia import provided by TA
 - Tutor
 - Mongoose Email Validation: ([here](https://masteringjs.io/tutorials/mongoose/mongoose-validate-unique-email)) and ([here](https://mongoosejs.com/docs/validation.html))
 - Mongoose Virtuals: ([here](https://mongoosejs.com/docs/tutorials/virtuals.html))
 - Date/Time Formatting: ([here](https://www.w3schools.com/jsref/jsref_tolocalestring.asp))
+- Mongoose Documentation: ([here](https://mongoosejs.com/docs/tutorials/getters-setters.html))
 
 ### Assets :sparkles:
 - [Express](https://www.npmjs.com/package/express) Package

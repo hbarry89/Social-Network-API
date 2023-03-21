@@ -1,34 +1,9 @@
-const mongoose = require('mongoose');
-
-// Reaction subdocument schema
-const reactionSchema = new mongoose.Schema({
-  reactionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    default: () => new mongoose.Types.ObjectId()
-  },
-  reactionBody: {
-    type: String,
-    required: true,
-    maxlength: 280
-  },
-  username: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: createdAtVal => dateFormat(createdAtVal)
-  }
-},
-{
-  toJSON: {
-    getters: true
-  }
-});
+const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction');
 
 // Thought model schema
-const thoughtSchema = new mongoose.Schema({
+const thoughtSchema = new Schema(
+{
   thoughtText: {
     type: String,
     required: true,
@@ -54,7 +29,7 @@ const thoughtSchema = new mongoose.Schema({
   id: false
 });
 
-// Reaction virtual
+// Create a virtual property `reactionCount` that gets the amount of reactions associated with a thought
 thoughtSchema.virtual('reactionCount').get(function() {
   return this.reactions.length;
 });
@@ -64,6 +39,7 @@ function dateFormat(date) {
   return date.toLocaleString();
 }
 
-const Thought = mongoose.model('thought', thoughtSchema);
+// Initialize Thought model
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;
