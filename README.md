@@ -10,13 +10,7 @@
 
 - [Click here](*) for a video demo of this application.
 
-**Use the following commands to:**
-
-- Seed database with test data:
-
-`npm run seed`
-
-- Invoke the application:
+- Enter the following commands to invoke the application:
 
 `npm run start`
 
@@ -25,13 +19,13 @@
 ### Resources :books:
 - Bootcamp Materials
 - Unit 18 Mini-Project
+- Mongoose Email Validation: ([here](https://masteringjs.io/tutorials/mongoose/mongoose-validate-unique-email)) and ([here](https://mongoosejs.com/docs/validation.html))
+- Mongoose Virtuals: ([here](https://mongoosejs.com/docs/tutorials/virtuals.html))
+- Mongoose Getters and Setters: ([here](https://mongoosejs.com/docs/tutorials/getters-setters.html))
+- Date/Time Formatting: ([here](https://www.w3schools.com/jsref/jsref_tolocalestring.asp))
 - Demonstration by TA in class
 - Insomnia import provided by TA
 - Tutor
-- Mongoose Email Validation: ([here](https://masteringjs.io/tutorials/mongoose/mongoose-validate-unique-email)) and ([here](https://mongoosejs.com/docs/validation.html))
-- Mongoose Virtuals: ([here](https://mongoosejs.com/docs/tutorials/virtuals.html))
-- Date/Time Formatting: ([here](https://www.w3schools.com/jsref/jsref_tolocalestring.asp))
-- Mongoose Documentation: ([here](https://mongoosejs.com/docs/tutorials/getters-setters.html))
 
 ### Assets :sparkles:
 - [Express](https://www.npmjs.com/package/express) Package
