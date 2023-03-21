@@ -29,7 +29,7 @@ module.exports = {
     // }
   createThought(req, res) {
     Thought.create(req.body)
-      .then((dbThoughtData) => res.json(dbThoughtData))
+      .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -68,14 +68,14 @@ module.exports = {
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $addToSet: { assignments: req.body } },
+      { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
         !thought
           ? res
               .status(404)
-              .json({ message: 'No thought with this id!' })
+              .json({ message: 'No reaction with this id!' })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
@@ -92,7 +92,7 @@ module.exports = {
         !thought
           ? res
               .status(404)
-              .json({ message: 'No thought with this id!' })
+              .json({ message: 'No reaction with this id!' })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
