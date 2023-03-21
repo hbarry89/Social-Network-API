@@ -1,6 +1,5 @@
 const Thought = require('../models/Thought');
-
-// /api/thoughts
+const User = require('../models/User');
 
 module.exports = {
   // GET to get all thoughts
@@ -19,17 +18,19 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // create a new thought
   // POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
-    // example data
-    // {
-    //   "thoughtText": "Here's a cool thought...",
-    //   "username": "lernantino",
-    //   "userId": "5edff358a0fcb779aa7b118b"
-    // }
   createThought(req, res) {
     Thought.create(req.body)
-      .then((thought) => res.json(thought))
+      .then((thought) => {
+        User.findOneAndUpdate(
+          { _id: req.body.userId },
+          { $push: {thoughts: thought._id} },
+          { runValidators: true, new: true }
+        )
+        .then((result) => {
+          res.json(result)
+        })
+      })
       .catch((err) => res.status(500).json(err));
   },
 
@@ -60,11 +61,6 @@ module.exports = {
   },
 
   // POST to create a reaction stored in a single thought's reactions array field
-  // createReaction(req, res) {
-  //   Thought.create(req.body)
-  //     .then((dbReactionData) => res.json(dbReactionData))
-  //     .catch((err) => res.status(500).json(err));
-  // },
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },

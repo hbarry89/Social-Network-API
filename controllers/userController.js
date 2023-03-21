@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 module.exports = {
@@ -11,6 +10,8 @@ module.exports = {
   // GET a single user by its _id and populated thought and friend data
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
+      .populate('thoughts')
+      .populate('friends')
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with this id!' })
@@ -18,13 +19,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // create a new user
-  // POST a new user:
-    // example data
-    // {
-    //   "username": "lernantino",
-    //   "email": "lernantino@gmail.com"
-    // }
+  // POST a new user
   createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
@@ -60,15 +55,10 @@ module.exports = {
   },
 
   // POST to add a new friend to a user's friend list
-  // addFriend(req, res) {
-  //   User.create(req.body)
-  //     .then((dbFriendData) => res.json(dbFriendData))
-  //     .catch((err) => res.status(500).json(err));
-  // },
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.body } },
+      { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
@@ -85,7 +75,7 @@ module.exports = {
   deleteFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
