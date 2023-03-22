@@ -8,7 +8,7 @@
 
 ## Usage
 
-- [Click here](*) for a video demo of this application.
+- [Click here](https://drive.google.com/file/d/1ppO7AGZM48_msU3IXBbABQpY7qsiPifG/view) for a video demo of this application.
 
 - Enter the following commands to invoke the application:
 
