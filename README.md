@@ -10,7 +10,7 @@
 
 - [Click here](https://drive.google.com/file/d/1ppO7AGZM48_msU3IXBbABQpY7qsiPifG/view) for a video demo of this application.
 
-- Enter the following commands to invoke the application:
+- Enter the following command to invoke the application:
 
 `npm run start`
 
